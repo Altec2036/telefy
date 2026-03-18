@@ -1,36 +1,134 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Web3 Portfolio Dashboard (MVP)
 
-## Getting Started
+Production-ready MVP dashboard for Ethereum portfolios:
+- Native ETH balance and USD valuation
+- Tracked ERC-20 token balances and USD valuation
+- Uniswap V2/V3 liquidity positions with strict math-based valuation
 
-First, run the development server:
+## Deploy Link
+
+- Live app: [https://telefy.uk](https://telefy.uk)
+
+## Stack
+
+- Next.js (App Router)
+- TypeScript
+- Tailwind CSS
+- viem (on-chain calls)
+- Alchemy SDK (token balances)
+
+## Features
+
+- **ETH Module**
+  - Reads native ETH via RPC
+  - Converts to USD using live price feeds
+
+- **ERC-20 Module**
+  - Aggregates tracked tokens with Alchemy Token API
+  - Fallback on-chain reads when needed
+  - Calculates per-token USD and total USD
+
+- **Uniswap V2 Module**
+  - Uses LP ownership share:
+    - `userShare = lpBalance / totalSupply`
+    - `amount0 = userShare * reserve0`
+    - `amount1 = userShare * reserve1`
+  - Converts both token amounts to USD
+
+- **Uniswap V3 Module (Strict Math)**
+  - Scans position NFTs from `NonfungiblePositionManager`
+  - Reads `positions(tokenId)`, pool `slot0()`, ticks and liquidity
+  - Implements strict formulas:
+    - `sqrtPrice = sqrtPriceX96 / 2^96`
+    - `sqrtLower = sqrt(1.0001^tickLower)`
+    - `sqrtUpper = sqrt(1.0001^tickUpper)`
+    - branch logic for below/in/above range
+  - Includes `tokensOwed0`/`tokensOwed1` in final amounts
+
+- **API Endpoints**
+  - `GET /portfolio/{address}`
+  - `GET /balance/eth/{address}`
+  - `GET /balance/tokens/{address}`
+  - `GET /liquidity/{address}`
+  - `GET /health`
+  - Compatibility aliases under `/api/*` are also available.
+
+- **UI/UX**
+  - Light/dark themes
+  - EN/RU language switch
+  - Streaming modules with skeleton states
+  - Onboarding walkthrough
+  - Token/network logos
+
+## Environment Variables
+
+Create `.env.local` from `.env.example`:
+
+```bash
+cp .env.example .env.local
+```
+
+Required variables:
+
+```env
+RPC_URL=https://ethereum.publicnode.com
+ALCHEMY_API_KEY=
+MAX_V3_POSITIONS_TO_SCAN=30
+MAX_V3_SCAN_TIME_MS=8000
+```
+
+Security notes:
+- Never commit `.env*` files (except `.env.example`)
+- Keep API keys only in local/server env files
+
+## How to Run (Local)
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Configure environment:
+
+```bash
+cp .env.example .env.local
+```
+
+3. Start dev server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+`http://localhost:3000`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## How to Run (Docker)
 
-## Learn More
+Build image:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+docker build -t telefy-portfolio .
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Run container:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+docker run --env-file .env.local -p 3000:3000 telefy-portfolio
+```
 
-## Deploy on Vercel
+## Quality Checks
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run lint
+npm run test
+npm run build
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Test Addresses (with Uniswap activity)
+
+- `0x1D355CC3fe9A365DdD7Eb9e65B969895c35A37BC`
+- `0x514C52CfD8Db898A95FDCEccBEe6e6556945630E`
+- `0x615a681176023BFC4CFa94932f39ED7E8b0A5432`
