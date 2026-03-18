@@ -132,3 +132,5 @@ npm run build
 - `0x1D355CC3fe9A365DdD7Eb9e65B969895c35A37BC`
 - `0x514C52CfD8Db898A95FDCEccBEe6e6556945630E`
 - `0x615a681176023BFC4CFa94932f39ED7E8b0A5432`
+
+These are public on-chain addresses provided only for functional validation and demo purposes. No private keys or sensitive credentials are included in this repository.
