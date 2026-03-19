@@ -118,7 +118,7 @@ export function BalanceChart({ values }: BalanceChartProps) {
       option={option}
       notMerge
       lazyUpdate
-      style={{ height: 230, width: "100%" }}
+      style={{ height: 200, width: "100%" }}
     />
   );
 }

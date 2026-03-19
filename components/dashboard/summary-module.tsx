@@ -25,7 +25,7 @@ export async function SummaryModule({ address, lang }: SummaryModuleProps) {
   const trackedTokensUsd = portfolio.tokens.reduce((sum, token) => sum + token.usdValue, 0);
 
   return (
-    <div className="grid gap-4 lg:grid-cols-2">
+    <div className="grid w-full grid-cols-1 gap-4 lg:grid-cols-2">
       <HeroBalanceCard
         title={t.totalBalanceUsd}
         value={`$${portfolio.totalUsd.toLocaleString(undefined, { maximumFractionDigits: 2 })}`}
@@ -35,7 +35,7 @@ export async function SummaryModule({ address, lang }: SummaryModuleProps) {
 
       <article
         id="eth"
-        className="rounded-2xl border border-[var(--card-border)] bg-[var(--card-bg)] p-4 shadow-[var(--card-shadow)] backdrop-blur-xl"
+        className="w-full min-w-0 overflow-hidden rounded-2xl border border-[var(--card-border)] bg-[var(--card-bg)] p-4 shadow-[var(--card-shadow)] backdrop-blur-xl"
       >
         <div className="mb-2 flex items-center gap-2 text-[var(--text-muted)]">
           <Coins size={16} />
@@ -52,7 +52,7 @@ export async function SummaryModule({ address, lang }: SummaryModuleProps) {
         </div>
       </article>
 
-      <article className="rounded-2xl border border-[var(--card-border)] bg-[var(--card-bg)] p-4 shadow-[var(--card-shadow)] backdrop-blur-xl">
+      <article className="w-full min-w-0 overflow-hidden rounded-2xl border border-[var(--card-border)] bg-[var(--card-bg)] p-4 shadow-[var(--card-shadow)] backdrop-blur-xl">
         <div className="mb-2 flex items-center gap-2 text-[var(--text-muted)]">
           <Activity size={16} />
           <p className="text-sm uppercase tracking-[0.16em]">{t.status}</p>
@@ -66,7 +66,7 @@ export async function SummaryModule({ address, lang }: SummaryModuleProps) {
         </p>
       </article>
 
-      <article className="rounded-2xl border border-[var(--card-border)] bg-[var(--card-bg)] p-4 shadow-[var(--card-shadow)] backdrop-blur-xl">
+      <article className="w-full min-w-0 overflow-hidden rounded-2xl border border-[var(--card-border)] bg-[var(--card-bg)] p-4 shadow-[var(--card-shadow)] backdrop-blur-xl">
         <div className="mb-2 flex items-center gap-2 text-[var(--text-muted)]">
           <ChartPie size={16} />
           <p className="text-sm uppercase tracking-[0.16em]">{t.trackedTokens}</p>

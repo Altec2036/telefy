@@ -14,7 +14,7 @@ export async function TokensModule({ address, lang }: TokensModuleProps) {
   const totalUsd = tokens.reduce((sum, token) => sum + token.usdValue, 0);
 
   return (
-    <section className="rounded-2xl border border-[var(--card-border)] bg-[var(--card-bg)] p-4 shadow-[var(--card-shadow)] backdrop-blur-xl">
+    <section className="w-full min-w-0 overflow-hidden rounded-2xl border border-[var(--card-border)] bg-[var(--card-bg)] p-4 shadow-[var(--card-shadow)] backdrop-blur-xl">
       <div className="mb-4 flex items-center justify-between gap-3">
         <div className="flex items-center gap-2 text-[var(--text-muted)]">
           <Coins size={16} />
