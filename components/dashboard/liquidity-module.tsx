@@ -13,7 +13,7 @@ export async function LiquidityModule({ address, lang }: LiquidityModuleProps) {
   const liquidity = await getLiquidityPositions(address);
 
   return (
-    <section className="rounded-2xl border border-[var(--card-border)] bg-[var(--card-bg)] p-4 shadow-[var(--card-shadow)] backdrop-blur-xl">
+    <section className="w-full min-w-0 overflow-hidden rounded-2xl border border-[var(--card-border)] bg-[var(--card-bg)] p-4 shadow-[var(--card-shadow)] backdrop-blur-xl">
       <div className="mb-4 flex items-center justify-between gap-3">
         <div className="flex items-center gap-2 text-[var(--text-muted)]">
           <Waves size={16} />

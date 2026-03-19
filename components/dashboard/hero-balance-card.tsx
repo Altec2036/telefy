@@ -22,7 +22,7 @@ export function HeroBalanceCard({
   className,
 }: HeroBalanceCardProps) {
   return (
-    <LiquidCard className={cn("min-h-[300px]", className)} delay={delay}>
+    <LiquidCard className={cn("min-h-[280px]", className)} delay={delay}>
       <div data-tour-id="summary-card">
         <p className="text-xs uppercase tracking-[0.16em] text-[var(--text-soft)]">{title}</p>
         <p className="mt-2 text-4xl font-bold tracking-tight text-[var(--text-main)] md:text-5xl">{value}</p>

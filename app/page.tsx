@@ -40,8 +40,8 @@ export default async function Home({ searchParams }: HomeProps) {
     <main className="min-h-screen text-[var(--text-main)]">
       <div className="mx-auto flex max-w-[1600px] flex-col gap-4 p-3 sm:p-4 lg:p-6 xl:flex-row">
         <Sidebar lang={lang} />
-        <section className="w-full space-y-4">
-          <header className="rounded-2xl border border-[var(--card-border)] bg-[var(--card-bg)] p-4 shadow-[var(--card-shadow)] backdrop-blur-xl">
+        <section className="min-w-0 flex-1 space-y-4">
+          <header className="w-full min-w-0 overflow-hidden rounded-2xl border border-[var(--card-border)] bg-[var(--card-bg)] p-4 shadow-[var(--card-shadow)] backdrop-blur-xl">
             <div className="flex items-center justify-between gap-3">
               <p className="text-xs uppercase tracking-[0.2em] text-violet-400">TELEFY.UK</p>
               <div className="flex flex-wrap items-center justify-end gap-2 xl:hidden">
